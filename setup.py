@@ -15,4 +15,5 @@ setup(name='Calculator',
       version = '1.0',
       description = 'Simple Calculator',
       options = dict(build_exe = buildOptions),
-      executables = executables)
+      executables = executables,
+      icon="icon.png")

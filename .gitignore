@@ -54,3 +54,5 @@ __pycache__/*
 build/exe\.linux-x86_64-3\.6/
 
 src/gui/__pycache__/
+
+build/

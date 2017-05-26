@@ -2,8 +2,8 @@ import re
 
 from PyQt5.QtWidgets import QVBoxLayout
 
-from gui.CalcButtons import CalcButtons
-from gui.CalcDisplay import CalcDisplay
+from src.gui.CalcButtons import CalcButtons
+from src.gui.CalcDisplay import CalcDisplay
 
 
 class MainLayout(QVBoxLayout):
@@ -13,6 +13,9 @@ class MainLayout(QVBoxLayout):
         # self.window_bar = WindowBar()
         self.calc_display = CalcDisplay()
         self.calc_buttons = CalcButtons()
+        self.lines = 1
+
+        self.clear_display = False
 
         # self.addWidget(self.window_bar)
         self.addWidget(self.calc_display)
@@ -38,9 +41,8 @@ class MainLayout(QVBoxLayout):
         self.calc_buttons.btn_open_bracket.clicked.connect(lambda: self.update_display("(", False))
         self.calc_buttons.btn_close_bracket.clicked.connect(lambda: self.update_display(")", False))
         self.calc_buttons.btn_pi.clicked.connect(lambda: self.update_display("π", False))
+        self.calc_buttons.btn_pow.clicked.connect(lambda: self.update_display('^', False))
         self.calc_buttons.btn_more.clicked.connect(self.calc_buttons.toggle_extras)
-
-        self.clear_display = False
 
     def update_display(self, text, result):
         if not result:
@@ -49,14 +51,15 @@ class MainLayout(QVBoxLayout):
                 self.clear_display = False
 
             if self.calc_display.display_txt.text() == "0":
-                if re.match(r'^[0-9()π]*$', text):
+                if re.match(r'^[0-9()π^]*$', text):
                     self.calc_display.display_txt.setText(text)
                 else:
                     self.calc_display.display_txt.setText(self.calc_display.display_txt.text() + text)
 
             else:
-                if len(self.calc_display.display_txt.text()) >= 8 and text != ".":
+                if len(self.calc_display.display_txt.text()) >= 8 and text != "." and self.lines == 1:
                     self.calc_display.display_txt.setText(self.calc_display.display_txt.text() + "\n" + text)
+                    self.lines += 1
                 else:
                     self.calc_display.display_txt.setText(self.calc_display.display_txt.text() + text)
         else:

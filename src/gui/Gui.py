@@ -4,8 +4,8 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMainWindow, QWidget
 
-from calc import Calc
-from gui.MainLayout import MainLayout
+from src.calc import Calc
+from src.gui.MainLayout import MainLayout
 
 
 class MainWindow(QMainWindow):

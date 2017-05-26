@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout
 from PyQt5.QtGui import QColor
 from PyQt5.QtCore import Qt
 
-from gui.OpBtn import OpBtn
+from src.gui.OpBtn import OpBtn
 
 
 class CalcDisplay(QWidget):

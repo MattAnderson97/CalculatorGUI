@@ -1,8 +1,8 @@
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout
 
-from gui.NumBtn import NumBtn
-from gui.OpBtn import OpBtn
+from src.gui.NumBtn import NumBtn
+from src.gui.OpBtn import OpBtn
 
 
 class CalcButtons(QWidget):
@@ -26,9 +26,11 @@ class CalcButtons(QWidget):
         self.btn_sub = OpBtn("−")
         self.btn_mult = OpBtn("×")
         self.btn_div = OpBtn("÷")
+        self.btn_pow= OpBtn("^")
         self.btn_open_bracket = OpBtn("(")
         self.btn_close_bracket = OpBtn(")")
         self.btn_pi = OpBtn("π")
+        self.btn_pow= OpBtn("^")
         self.btn_more = OpBtn("≡")
 
         self.extra_ops_visible = False
@@ -58,6 +60,7 @@ class CalcButtons(QWidget):
         extra_ops_layout.addWidget(self.btn_open_bracket)
         extra_ops_layout.addWidget(self.btn_close_bracket)
         extra_ops_layout.addWidget(self.btn_pi)
+        extra_ops_layout.addWidget(self.btn_pow)
         self.extra_ops = QWidget()
         self.extra_ops.setLayout(extra_ops_layout)
 
