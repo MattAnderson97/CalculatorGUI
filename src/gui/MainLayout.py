@@ -1,4 +1,5 @@
 import re
+from math import ceil
 
 from PyQt5.QtWidgets import QVBoxLayout
 
@@ -43,6 +44,7 @@ class MainLayout(QVBoxLayout):
         self.calc_buttons.btn_pi.clicked.connect(lambda: self.update_display("π", False))
         self.calc_buttons.btn_pow.clicked.connect(lambda: self.update_display('^', False))
         self.calc_buttons.btn_more.clicked.connect(self.calc_buttons.toggle_extras)
+        self.calc_display.btn_back.clicked.connect(self.del_char)
 
     def update_display(self, text, result):
         if not result:
@@ -65,3 +67,7 @@ class MainLayout(QVBoxLayout):
         else:
             self.clear_display = True
             self.calc_display.display_txt.setText(text)
+
+    def del_char(self):
+        self.calc_display.display_txt.setText(self.calc_display.display_txt.text()[:-1])
+        self.lines = 2 if len(self.calc_display.display_txt.text()) > 8 else 1

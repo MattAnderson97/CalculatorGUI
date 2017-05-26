@@ -46,4 +46,4 @@ class MainWindow(QMainWindow):
 
     def keyPressEvent(self, event):
         if event.key() == Qt.Key_Backspace:
-            self.main_layout.calc_display.display_txt.setText(self.main_layout.calc_display.display_txt.text()[:-1])
+            self.main_layout.del_char()

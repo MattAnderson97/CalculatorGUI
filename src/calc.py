@@ -12,10 +12,9 @@ class Calc:
     def parse_calculation(eq: str):
         pattern = r'^[0-9\(\)\./\*\+\-\^]*$'
         result = None
-        valid = True
-        for char in eq:
-            if not re.match(pattern, char):
-                return CalcResponse(result, "Failure - invalid calculation")
+
+        if not re.match(pattern, eq):
+            return CalcResponse(result, "Failure - invalid calculation")
 
         for char in eq:
             if char == "^":

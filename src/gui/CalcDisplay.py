@@ -34,5 +34,4 @@ class CalcDisplay(QWidget):
         display_palette.setColor(self.backgroundRole(), QColor(30, 30, 30))
         self.setPalette(display_palette)
 
-        self.btn_back.clicked.connect(lambda: self.display_txt.setText(self.display_txt.text()[:-1]))
         self.btn_clr.clicked.connect(lambda: self.display_txt.setText("0"))
