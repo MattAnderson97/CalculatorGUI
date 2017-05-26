@@ -1,8 +1,11 @@
+from math import pi
+
+from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMainWindow, QWidget
 
-from src.gui.MainLayout import MainLayout
-from src.gui.calc import Calc
+from calc import Calc
+from gui.MainLayout import MainLayout
 
 
 class MainWindow(QMainWindow):
@@ -16,6 +19,7 @@ class MainWindow(QMainWindow):
         self.central_widget = QWidget()
         self.central_widget.setLayout(self.main_layout)
         self.setCentralWidget(self.central_widget)
+        self.setFixedSize(250, 420)
 
         # self.main_layout.window_bar.close_btn.clicked.connect(self.close)
         # self.main_layout.window_bar.minimise_btn.clicked.connect(self.showMinimized)
@@ -23,7 +27,7 @@ class MainWindow(QMainWindow):
         self.main_layout.calc_buttons.btn_equals.clicked.connect(self.do_calc)
 
     def do_calc(self):
-        eq = self.main_layout.calc_display.display_txt.text()
+        eq = self.main_layout.calc_display.display_txt.text().replace("\n", "").replace("π", str(pi.__abs__()))
         print(eq)
         result = Calc.parse_calculation(eq)
         print("{0}:{1}".format(result.response, result.result))
@@ -39,3 +43,7 @@ class MainWindow(QMainWindow):
         x_w = self.offset.x()
         y_w = self.offset.y()
         self.move(x - x_w, y - y_w)
+
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key_Backspace:
+            self.main_layout.calc_display.display_txt.setText(self.main_layout.calc_display.display_txt.text()[:-1])

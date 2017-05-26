@@ -1,8 +1,8 @@
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout
 
-from src.gui.NumBtn import NumBtn
-from src.gui.OpBtn import OpBtn
+from gui.NumBtn import NumBtn
+from gui.OpBtn import OpBtn
 
 
 class CalcButtons(QWidget):
@@ -26,6 +26,12 @@ class CalcButtons(QWidget):
         self.btn_sub = OpBtn("−")
         self.btn_mult = OpBtn("×")
         self.btn_div = OpBtn("÷")
+        self.btn_open_bracket = OpBtn("(")
+        self.btn_close_bracket = OpBtn(")")
+        self.btn_pi = OpBtn("π")
+        self.btn_more = OpBtn("≡")
+
+        self.extra_ops_visible = False
 
         bottom_row_layout = QHBoxLayout()
         mid_lower_row_layout = QHBoxLayout()
@@ -48,6 +54,19 @@ class CalcButtons(QWidget):
         top_row_layout.addWidget(self.btn_8)
         top_row_layout.addWidget(self.btn_9)
 
+        extra_ops_layout = QHBoxLayout()
+        extra_ops_layout.addWidget(self.btn_open_bracket)
+        extra_ops_layout.addWidget(self.btn_close_bracket)
+        extra_ops_layout.addWidget(self.btn_pi)
+        self.extra_ops = QWidget()
+        self.extra_ops.setLayout(extra_ops_layout)
+
+        self.extra_ops.setAutoFillBackground(True)
+        extra_ops_palette = self.extra_ops.palette()
+        extra_ops_palette.setColor(self.extra_ops.backgroundRole(), QColor(50, 50, 50))
+        self.extra_ops.setPalette(extra_ops_palette)
+        self.extra_ops.hide()
+
         bottom_row = QWidget()
         bottom_row.setLayout(bottom_row_layout)
         mid_lower_row = QWidget()
@@ -58,12 +77,16 @@ class CalcButtons(QWidget):
         top_row.setLayout(top_row_layout)
 
         btn_layout = QVBoxLayout()
+        btn_layout.addWidget(self.extra_ops)
         btn_layout.addWidget(top_row)
         btn_layout.addWidget(mid_upper_row)
         btn_layout.addWidget(mid_lower_row)
         btn_layout.addWidget(bottom_row)
+        btn_layout.setContentsMargins(0, 0, 0, 0)
+        btn_layout.setSpacing(0)
 
         side_btns_layout = QVBoxLayout()
+        side_btns_layout.addWidget(self.btn_more)
         side_btns_layout.addWidget(self.btn_add)
         side_btns_layout.addWidget(self.btn_sub)
         side_btns_layout.addWidget(self.btn_mult)
@@ -89,3 +112,11 @@ class CalcButtons(QWidget):
         calc_buttons_layout.setSpacing(0)
 
         self.setLayout(calc_buttons_layout)
+
+    def toggle_extras(self):
+        if not self.extra_ops_visible:
+            self.extra_ops.show()
+            self.extra_ops_visible = True
+        else:
+            self.extra_ops.hide()
+            self.extra_ops_visible = False

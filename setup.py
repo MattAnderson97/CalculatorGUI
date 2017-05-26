@@ -8,7 +8,7 @@ import sys
 base = 'Win32GUI' if sys.platform=='win32' else None
 
 executables = [
-    Executable('main.py', base=base, targetName = 'Calculator')
+    Executable('src/main.py', base=base, targetName = 'Calculator')
 ]
 
 setup(name='Calculator',

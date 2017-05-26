@@ -5,7 +5,7 @@ import sys
 
 from PyQt5.QtWidgets import QApplication
 
-from src.gui.Gui import MainWindow
+from gui.Gui import MainWindow
 
 if __name__ == "__main__":
     # sets task bar icon

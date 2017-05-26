@@ -1,8 +1,9 @@
 import re
 
-from src.gui.CalcButtons import CalcButtons
-from src.gui.CalcDisplay import CalcDisplay
 from PyQt5.QtWidgets import QVBoxLayout
+
+from gui.CalcButtons import CalcButtons
+from gui.CalcDisplay import CalcDisplay
 
 
 class MainLayout(QVBoxLayout):
@@ -34,15 +35,30 @@ class MainLayout(QVBoxLayout):
         self.calc_buttons.btn_sub.clicked.connect(lambda: self.update_display("-", False))
         self.calc_buttons.btn_mult.clicked.connect(lambda: self.update_display("*", False))
         self.calc_buttons.btn_div.clicked.connect(lambda: self.update_display("/", False))
+        self.calc_buttons.btn_open_bracket.clicked.connect(lambda: self.update_display("(", False))
+        self.calc_buttons.btn_close_bracket.clicked.connect(lambda: self.update_display(")", False))
+        self.calc_buttons.btn_pi.clicked.connect(lambda: self.update_display("π", False))
+        self.calc_buttons.btn_more.clicked.connect(self.calc_buttons.toggle_extras)
+
+        self.clear_display = False
 
     def update_display(self, text, result):
         if not result:
+            if self.clear_display:
+                self.calc_display.display_txt.setText("0")
+                self.clear_display = False
+
             if self.calc_display.display_txt.text() == "0":
-                if re.match(r'^[0-9]*$', text):
+                if re.match(r'^[0-9()π]*$', text):
                     self.calc_display.display_txt.setText(text)
                 else:
                     self.calc_display.display_txt.setText(self.calc_display.display_txt.text() + text)
+
             else:
-                self.calc_display.display_txt.setText(self.calc_display.display_txt.text() + text)
+                if len(self.calc_display.display_txt.text()) >= 8 and text != ".":
+                    self.calc_display.display_txt.setText(self.calc_display.display_txt.text() + "\n" + text)
+                else:
+                    self.calc_display.display_txt.setText(self.calc_display.display_txt.text() + text)
         else:
+            self.clear_display = True
             self.calc_display.display_txt.setText(text)
