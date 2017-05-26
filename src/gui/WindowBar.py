@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QWidget, QPushButton
 from PyQt5.QtGui import QColor
 from PyQt5.QtCore import Qt
+        """)
 
 
 class WindowBar(QWidget):
@@ -24,7 +25,6 @@ class WindowBar(QWidget):
         padding-bottom: 2px;
         border: 1px solid #e09e3e;
         border-radius:5px;
-        """)
         self.minimise_btn.setFixedHeight(10)
         self.minimise_btn.setFixedWidth(10)
 

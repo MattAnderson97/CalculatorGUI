@@ -1,6 +1,6 @@
 import re
 
-from calcresponse import CalcResponse
+from src.gui.calcresponse import CalcResponse
 
 
 class Calc:

@@ -1,16 +1,21 @@
-import ctypes
+#!/usr/bin/env python3
+# coding: utf-8
+
 import sys
 
 from PyQt5.QtWidgets import QApplication
 
-from GUI.Gui import MainWindow
-
+from src.gui.Gui import MainWindow
 
 if __name__ == "__main__":
     # sets task bar icon
     # https://stackoverflow.com/questions/1551605/how-to-set-applications-taskbar-icon-in-windows-7/1552105#1552105
-    appid = 'space.wolv.calculator.1-0'
-    ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(appid)
+    try:
+        import ctypes
+        appid = 'space.wolv.calculator.1-0'
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(appid)
+    except AttributeError:
+        pass
 
     # launch application
     application = QApplication(sys.argv)
